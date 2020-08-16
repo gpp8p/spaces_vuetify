@@ -1,32 +1,43 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-main>
+      <Content></Content>
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+import Content from './components/contentContainer.vue';
+import store from './store';
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+export default {
+  name: 'App',
+  store,
+  components: {
+    Content
+  },
+  created(){
+    var pathArray=this.$route.path.substring(1).split('/');
+    if(pathArray)
+    store.commit('setDefaultOrg', pathArray);
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
+<style scoped>
+  .rounded-Corners{
+    background-color: #ddd92a;
+    width:100%;
+    height: 100%;
+    border-radius: 4px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #0a3aff;
+
   }
-}
 </style>
