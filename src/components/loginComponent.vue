@@ -76,6 +76,7 @@
             }else{
                 this.sendLogin('GuestUser@nomail.com', 'GuestUser', this.setLoginStatus);
             }
+//            console.log(this.$store.getters.getDefaultOrg[0]);
         },
         data(){
             return {
@@ -110,7 +111,7 @@
                 this.sendLogin('GuestUser@nomail.com', 'GuestUser', this.setLoginStatus);
             },
             setLoginStatus(newStatus){
-                debugger;
+//                debugger;
                if(newStatus<0){
                    this.email='';
                    this.password='';
@@ -119,15 +120,20 @@
                 this.$forceUpdate();
             },
             sendLogin(email, password, setStatus){
+//                debugger;
                 axios.post('http://localhost:8000/api/auth/login?XDEBUG_SESSION_START=15022', {
                     email: email,
-                    password: password
+                    password: password,
+                    default_org: this.$store.getters.getDefaultOrg[0]
                 }).then(response=>
                 {
                     this.credentials.bearerToken = response.data.access_token;
                     this.credentials.loggedInUser = response.data.userName;
                     this.credentials.loggedInUserId = response.data.userId;
                     this.credentials.is_admin = response.data.is_admin;
+
+                    store.commit('setOrgId', response.data.orgId);
+                    store.commit('setOrgHome', response.data.orgHome);
 
 
                     console.log('login successful');
@@ -136,7 +142,7 @@
 
 
                 }).catch(function(error) {
-                    debugger;
+//                    debugger;
                     console.log(error);
                     setStatus(-1);
                 });
