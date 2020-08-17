@@ -120,7 +120,7 @@
                 this.$forceUpdate();
             },
             sendLogin(email, password, setStatus){
-//                debugger;
+                debugger;
                 axios.post('http://localhost:8000/api/auth/login?XDEBUG_SESSION_START=15022', {
                     email: email,
                     password: password,
