@@ -1,18 +1,46 @@
 <template>
-    <h2>This is Display Layout: {{layoutId}} </h2>
+    <div v-bind:style="gridParamDefinition"  class="gridSection">
+        <generic-card
+                v-for="(instance, index) in cardInstances"
+                :key="index"
+                :cardType="instance.card_component"
+                :card-style="instance.card_parameters.style"
+                :card-id="instance.id"
+                :card-key="index"
+                :card-position="instance.card_position"
+                :gridCss="gridParamDefinition"
+                :cardProperties="instance.card_parameters.properties"
+                :displayStatus="displayStatus"
+                @storeValue="processClick"
+                @cardClick="cardClick"
+                @textEditor="textEditor"
+                @configurationHasBeenSaved="configurationHasBeenSaved"
+                @cardDataLoaded="cardDataLoaded"
+                @linkHelperRequested="linkHelperRequested"
+                ref="key"
+        ></generic-card>
+    </div>
 </template>
 
 <script>
     import axios from "axios";
     import store from "../store";
+//    import testCard from "../components/testCard.vue"
+    import genericCard from '../components/genericCard.vue';
     export default {
         name: "displayLayout",
+        components:{genericCard},
         mounted(){
           console.log('displayLayout mounted',this.$route.params.layoutId);
+          this.reloadLayoutForDisplay(this.$route.params.layoutId, this.$store.getters.getLoggedInUserId, this.$store.getters.getOrgId);
         },
         data(){
           return {
-              layoutId:this.$route.params.layoutId
+              layoutId:this.$route.params.layoutId,
+              cardInstances: [],
+              gridParamDefinition: "",
+              LayoutPermissions:{},
+              displayStatus: true
           }
         },
         methods: {

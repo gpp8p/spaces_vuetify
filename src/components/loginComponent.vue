@@ -137,6 +137,8 @@
 
                     store.commit('setOrgId', response.data.orgId);
                     store.commit('setOrgHome', response.data.orgHome);
+                    store.commit('setLoggedInUserId', response.data.userId);
+                    store.commit('setIsAdmin', response.data.is_admin);
 
 
                     console.log('login successful');
