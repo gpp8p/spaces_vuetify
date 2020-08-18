@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Foo from '../components/Foo.vue'
 import Bar from '../components/Bar.vue'
 import gridLayout from "../components/gridLayout";
 import Dtable from "../components/dtable.vue";
+import displayLayout from "../components/displayLayout.vue"
 
 Vue.use(VueRouter)
 
@@ -23,8 +23,8 @@ Vue.use(VueRouter)
     },
     {
       path: '/displayLayout',
-      name: 'foo',
-      component: Foo
+      name: 'displayLayout',
+      component: displayLayout
     },
     {
       path: '/Bar',

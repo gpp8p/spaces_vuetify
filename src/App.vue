@@ -20,7 +20,7 @@ export default {
   },
   created(){
     var pathArray=this.$route.path.substring(1).split('/');
-    debugger;
+//    debugger;
     if(pathArray[0].length>0){
       store.commit('setDefaultOrg', pathArray);
     }else{

@@ -11,7 +11,7 @@ export default new Vuex.Store({
             loggedInUser: '',
             is_admin: 0,
             default_org:'shannon',
-            org_home_id:0,
+            org_home:0,
             selected_org_id:0,
             org_id:0,
             perms: {}

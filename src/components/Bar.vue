@@ -3,8 +3,17 @@
 </template>
 
 <script>
+    import store from "../store";
+
     export default {
-        name: "Bar"
+        name: "Bar",
+        mounted(){
+                store.commit('setOrgHome',59);
+                this.$router.push({
+                name: 'displayLayout',
+                params: { layoutId: 59 }
+            });
+        }
     }
 </script>
 

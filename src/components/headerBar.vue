@@ -4,7 +4,7 @@
         <span class="tabArea">
             <menu-component :items='menuItems' @menuSelection="tabSelected"></menu-component>
         </span>
-        <span class="loginArea"><login-component></login-component></span>
+        <span class="loginArea"><login-component @login="login"></login-component></span>
 
     </div>
 
@@ -24,6 +24,9 @@
         methods:{
             tabSelected(msg){
                 this.$emit('tabSelected', msg[0]);
+            },
+            login(msg){
+                this.$emit('login', [msg[0]]);
             }
         }
     }

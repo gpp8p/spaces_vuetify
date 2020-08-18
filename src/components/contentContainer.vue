@@ -2,7 +2,7 @@
 
         <span class="layoutScreen">
           <section class="navbar">
-              <header-bar @tabSelected="tabSelected"></header-bar>
+              <header-bar @tabSelected="tabSelected" @login="login"></header-bar>
           </section>
           <section class="content">
             <Dialog :dialog = 'openDialog'></Dialog>
@@ -25,7 +25,7 @@
 //    import gridLayout from "./gridLayout";
     export default {
         name: "contentContainer",
-        components: {Dialog, headerBar,  },
+        components: {Dialog, headerBar},
         data(){
           return {
               openDialog: false,
@@ -33,7 +33,7 @@
         },
         methods: {
             tabSelected(msg){
-                debugger;
+//                debugger;
                 switch(msg){
                     case 'Edit':{
                         this.openDialog=false;
@@ -55,6 +55,14 @@
                         break;
                     }
                 }
+            },
+            login(msg){
+                console.log(msg[0]);
+                this.$router.push({
+                    name: 'displayLayout',
+                    params: { layoutId: msg[0] }
+                });
+//                debugger;
             }
         }
     }
