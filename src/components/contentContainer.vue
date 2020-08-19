@@ -96,7 +96,7 @@
     .navbar {
         margin-left: 2%;
         background-color: #ffcd90;
-        height:10vh;
+        height:8vh;
         width:97vw;
         border-radius: 4px;
         border-width: 2px;
