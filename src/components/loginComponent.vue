@@ -60,6 +60,7 @@
             this.showLoginFields=false;
         },
         mounted(){
+//            debugger;
             if(sessionStorage.length>0) {
                 this.credentials.bearerToken = sessionStorage.getItem('bearerToken');
                 this.credentials.loggedInUser = sessionStorage.getItem('loggedInUser');
@@ -72,6 +73,7 @@
                 store.commit('setLoggedInUser', this.credentials.loggedInUser);
                 store.commit('setIsAdmin', this.credentials.is_admin);
                 store.commit('setDefaultOrg', this.default_org);
+                this.logStatus=this.LOGGED_IN;
 
             }else{
                 this.sendLogin('GuestUser@nomail.com', 'GuestUser', this.setLoginStatus);
@@ -134,6 +136,13 @@
                     this.credentials.loggedInUser = response.data.userName;
                     this.credentials.loggedInUserId = response.data.userId;
                     this.credentials.is_admin = response.data.is_admin;
+
+                    sessionStorage.setItem('bearerToken', this.credentials.bearerToken);
+                    sessionStorage.setItem('loggedInUser', this.credentials.loggedInUser);
+                    sessionStorage.setItem('is_admin', this.credentials.is_admin);
+                    sessionStorage.setItem('loggedInUserId', this.credentials.loggedInUserId);
+                    sessionStorage.setItem('default_org', this.$store.getters.getDefaultOrg[0]);
+
 
                     store.commit('setOrgId', response.data.orgId);
                     store.commit('setOrgHome', response.data.orgHome);

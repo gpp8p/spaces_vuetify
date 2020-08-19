@@ -31,6 +31,7 @@
         name: "displayLayout",
         components:{genericCard},
         mounted(){
+          debugger;
           console.log('displayLayout mounted',this.$route.params.layoutId);
           this.reloadLayoutForDisplay(this.$route.params.layoutId, this.$store.getters.getLoggedInUserId, this.$store.getters.getOrgId);
         },

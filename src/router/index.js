@@ -22,7 +22,7 @@ Vue.use(VueRouter)
       component: Dtable
     },
     {
-      path: '/displayLayout',
+      path: '/displayLayout/:layoutId',
       name: 'displayLayout',
       component: displayLayout
     },
