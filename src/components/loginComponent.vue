@@ -73,6 +73,8 @@
                 store.commit('setLoggedInUser', this.credentials.loggedInUser);
                 store.commit('setIsAdmin', this.credentials.is_admin);
                 store.commit('setDefaultOrg', this.default_org);
+                store.commit('setOrgId', sessionStorage.getItem('org_id'));
+
                 this.logStatus=this.LOGGED_IN;
 
             }else{
@@ -142,14 +144,13 @@
                     sessionStorage.setItem('is_admin', this.credentials.is_admin);
                     sessionStorage.setItem('loggedInUserId', this.credentials.loggedInUserId);
                     sessionStorage.setItem('default_org', this.$store.getters.getDefaultOrg[0]);
+                    sessionStorage.setItem('org_id', response.data.orgId);
 
 
                     store.commit('setOrgId', response.data.orgId);
                     store.commit('setOrgHome', response.data.orgHome);
                     store.commit('setLoggedInUserId', response.data.userId);
                     store.commit('setIsAdmin', response.data.is_admin);
-
-
                     console.log('login successful');
                     console.log(response.data);
                     setStatus(this.LOGGED_IN);
