@@ -33,7 +33,16 @@
         mounted(){
           debugger;
           console.log('displayLayout mounted',this.$route.params.layoutId);
-          this.reloadLayoutForDisplay(this.$route.params.layoutId, this.$store.getters.getLoggedInUserId, this.$store.getters.getOrgId);
+            var thisLayoutIdStack;
+            var thisStringLayoutIdStack = sessionStorage.getItem('layoutIdStack');
+            if(thisStringLayoutIdStack==null){
+                thisLayoutIdStack = [];
+            }else{
+                thisLayoutIdStack = JSON.parse(thisStringLayoutIdStack);
+            }
+            thisLayoutIdStack.push(parseInt(this.$route.params.layoutId));
+            sessionStorage.setItem('layoutIdStack', JSON.stringify(thisLayoutIdStack));
+            this.reloadLayoutForDisplay(this.$route.params.layoutId, this.$store.getters.getLoggedInUserId, this.$store.getters.getOrgId);
         },
         data(){
           return {

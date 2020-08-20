@@ -1,6 +1,6 @@
 <template>
     <div class="hdrBarDiv">
-        <span class="contextArea">Context</span>
+        <span class="contextArea"><context-area></context-area></span>
         <span class="tabArea">
             <menu-component :items='menuItems' @menuSelection="tabSelected"></menu-component>
         </span>
@@ -13,6 +13,7 @@
 <script>
     import menuComponent from "../components/menuComponent.vue";
     import loginComponent  from "./loginComponent";
+    import contextArea from "../components/contextArea.vue";
     export default {
         name: "headerBar",
         data(){
@@ -20,7 +21,7 @@
             menuItems: ['Edit','Table', 'Bar', 'Dialog']
           }
         },
-        components: {menuComponent, loginComponent},
+        components: {menuComponent, loginComponent, contextArea},
         methods:{
             tabSelected(msg){
                 this.$emit('tabSelected', msg[0]);

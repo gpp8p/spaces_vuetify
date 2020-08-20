@@ -56,9 +56,6 @@
     import store from "../store";
     export default {
         name: "loginComponent",
-        created(){
-            this.showLoginFields=false;
-        },
         mounted(){
 //            debugger;
             if(sessionStorage.length>0) {
@@ -89,7 +86,6 @@
                 SHOW_LOGIN:1,
                 LOGGED_IN:2,
                 LOGIN_ERROR:-1,
-                showLoginFields:false,
                 email:'',
                 password:'',
                 credentials:{

@@ -14,7 +14,8 @@ export default new Vuex.Store({
             org_home:0,
             selected_org_id:0,
             org_id:0,
-            perms: {}
+            perms: {},
+            layoutIdStack:[]
         }
     },
     getters:{
@@ -44,6 +45,9 @@ export default new Vuex.Store({
         },
         getPerms(state){
             return state.credentials.perms
+        },
+        getLayoutIdStack(state){
+            return state.credentials.layoutIdStack
         }
     },
     mutations:{
@@ -73,6 +77,9 @@ export default new Vuex.Store({
         },
         setPerms(state, currentPerms){
             state.credentials.perms=currentPerms;
+        },
+        setLayoutIdStack(state, layoutIdStack){
+            state.credentials.layoutIdStack= layoutIdStack;
         }
 
     }
