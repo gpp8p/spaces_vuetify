@@ -1,6 +1,6 @@
 <template>
     <span>
-        <span class="labelLinkStyle" @click="goBack">Back</span>
+        <span v-if="this.showBackButton"  class="labelLinkStyle" @click="goBack">Back</span>
     </span>
 
 </template>
@@ -10,7 +10,19 @@
         name: "contextArea",
         data(){
             return {
-
+                showBackButton:false
+            }
+        },
+        props:{
+            layout :{
+                type:Number,
+                required:true
+            }
+        },
+        watch: {
+            layout: function(){
+                console.log('contextArea layout changed');
+                this.showBackButton=true;
             }
         },
         methods: {
@@ -34,6 +46,8 @@
                             params: { layoutId: nextLayoutId }
                         });
                         this.$router.go();
+                    }else{
+                        this.showBackButton=false;
                     }
                 }
             }

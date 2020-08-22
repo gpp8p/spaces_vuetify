@@ -57,13 +57,25 @@
     export default {
         name: "loginComponent",
         mounted(){
-//            debugger;
+            debugger;
             if(sessionStorage.length>0) {
                 this.credentials.bearerToken = sessionStorage.getItem('bearerToken');
                 this.credentials.loggedInUser = sessionStorage.getItem('loggedInUser');
                 this.credentials.loggedInUserId = sessionStorage.getItem('loggedInUserId');
                 this.credentials.is_admin = sessionStorage.getItem('is_admin');
                 this.default_org = sessionStorage.getItem('default_org');
+
+                var thisStringLayoutIdStack = sessionStorage.getItem('layoutIdStack');
+                var thisLayoutIdStack;
+                if(thisStringLayoutIdStack==null){
+                    thisLayoutIdStack = [];
+                }else{
+                    thisLayoutIdStack = JSON.parse(thisStringLayoutIdStack);
+                    var topStack = thisLayoutIdStack[thisLayoutIdStack.length-1];
+                    if(topStack!=this.$route.params.layoutId){
+                        this.$emit('newLayout', [this.$route.params.layoutId]);
+                    }
+                }
 
                 store.commit('setBearerToken', this.credentials.bearerToken);
                 store.commit('setLoggedInUserId', this.credentials.loggedInUserId);
@@ -123,11 +135,11 @@
                 this.$forceUpdate();
             },
             sendLogin(email, password, setStatus){
- //               debugger;
+                debugger;
                 axios.post('http://localhost:8000/api/auth/login?XDEBUG_SESSION_START=15022', {
                     email: email,
                     password: password,
-                    default_org: this.$store.getters.getDefaultOrg[0]
+                    default_org: this.$store.getters.getDefaultOrg
                 }).then(response=>
                 {
                     this.credentials.bearerToken = response.data.access_token;
@@ -139,7 +151,7 @@
                     sessionStorage.setItem('loggedInUser', this.credentials.loggedInUser);
                     sessionStorage.setItem('is_admin', this.credentials.is_admin);
                     sessionStorage.setItem('loggedInUserId', this.credentials.loggedInUserId);
-                    sessionStorage.setItem('default_org', this.$store.getters.getDefaultOrg[0]);
+                    sessionStorage.setItem('default_org', this.$store.getters.getDefaultOrg);
                     sessionStorage.setItem('org_id', response.data.orgId);
 
 

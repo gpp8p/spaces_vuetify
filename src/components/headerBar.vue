@@ -1,10 +1,10 @@
 <template>
     <div class="hdrBarDiv">
-        <span class="contextArea"><context-area></context-area></span>
+        <span class="contextArea"><context-area :layout="nextLayout"></context-area></span>
         <span class="tabArea">
             <menu-component :items='menuItems' @menuSelection="tabSelected"></menu-component>
         </span>
-        <span class="loginArea"><login-component @login="login"></login-component></span>
+        <span class="loginArea"><login-component @login="login" @newLayout="newLayout"></login-component></span>
 
     </div>
 
@@ -18,7 +18,8 @@
         name: "headerBar",
         data(){
           return {
-            menuItems: ['Edit','Table', 'Bar', 'Dialog']
+            menuItems: ['Edit','Table', 'Bar', 'Dialog'],
+            nextLayout:0
           }
         },
         components: {menuComponent, loginComponent, contextArea},
@@ -28,6 +29,10 @@
             },
             login(msg){
                 this.$emit('login', [msg[0]]);
+            },
+            newLayout(msg){
+              console.log('newLayout',msg);
+              this.nextLayout=parseInt(msg[0]);
             }
         }
     }
