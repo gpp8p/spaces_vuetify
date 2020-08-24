@@ -4,7 +4,7 @@
         <span class="tabArea">
             <menu-component :items='menuItems' @menuSelection="tabSelected"></menu-component>
         </span>
-        <span class="loginArea"><login-component @login="login" @newLayout="newLayout"></login-component></span>
+        <span class="loginArea"><login-component @login="login" @newLayout="newLayout" @logError="logError"></login-component></span>
 
     </div>
 
@@ -33,6 +33,9 @@
             newLayout(msg){
               console.log('newLayout',msg);
               this.nextLayout=parseInt(msg[0]);
+            },
+            logError(msg){
+                this.$emit('logError', msg);
             }
         }
     }

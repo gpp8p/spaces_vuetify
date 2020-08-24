@@ -142,26 +142,35 @@
                     default_org: this.$store.getters.getDefaultOrg
                 }).then(response=>
                 {
-                    this.credentials.bearerToken = response.data.access_token;
-                    this.credentials.loggedInUser = response.data.userName;
-                    this.credentials.loggedInUserId = response.data.userId;
-                    this.credentials.is_admin = response.data.is_admin;
+                    if(response.data.resultType==='Ok'){
+                        this.credentials.bearerToken = response.data.access_token;
+                        this.credentials.loggedInUser = response.data.userName;
+                        this.credentials.loggedInUserId = response.data.userId;
+                        this.credentials.is_admin = response.data.is_admin;
 
-                    sessionStorage.setItem('bearerToken', this.credentials.bearerToken);
-                    sessionStorage.setItem('loggedInUser', this.credentials.loggedInUser);
-                    sessionStorage.setItem('is_admin', this.credentials.is_admin);
-                    sessionStorage.setItem('loggedInUserId', this.credentials.loggedInUserId);
-                    sessionStorage.setItem('default_org', this.$store.getters.getDefaultOrg);
-                    sessionStorage.setItem('org_id', response.data.orgId);
+                        sessionStorage.setItem('bearerToken', this.credentials.bearerToken);
+                        sessionStorage.setItem('loggedInUser', this.credentials.loggedInUser);
+                        sessionStorage.setItem('is_admin', this.credentials.is_admin);
+                        sessionStorage.setItem('loggedInUserId', this.credentials.loggedInUserId);
+                        sessionStorage.setItem('default_org', this.$store.getters.getDefaultOrg);
+                        sessionStorage.setItem('org_id', response.data.orgId);
 
 
-                    store.commit('setOrgId', response.data.orgId);
-                    store.commit('setOrgHome', response.data.orgHome);
-                    store.commit('setLoggedInUserId', response.data.userId);
-                    store.commit('setIsAdmin', response.data.is_admin);
-                    console.log('login successful');
-                    console.log(response.data);
-                    setStatus(this.LOGGED_IN);
+                        store.commit('setOrgId', response.data.orgId);
+                        store.commit('setOrgHome', response.data.orgHome);
+                        store.commit('setLoggedInUserId', response.data.userId);
+                        store.commit('setIsAdmin', response.data.is_admin);
+                        console.log('login successful');
+                        console.log(response.data);
+                        setStatus(this.LOGGED_IN);
+                    }else{
+//                        debugger;
+                        console.log(response.data.resultType);
+                        this.$emit('logError', response.data.resultType);
+                    }
+
+
+
 
 
                 }).catch(function(error) {

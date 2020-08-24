@@ -2,7 +2,7 @@
 
         <span class="layoutScreen">
           <section class="navbar">
-              <header-bar @tabSelected="tabSelected" @login="login"></header-bar>
+              <header-bar @tabSelected="tabSelected" @login="login" @logError="logError"></header-bar>
           </section>
           <section class="content">
             <Dialog :dialog = 'openDialog'></Dialog>
@@ -64,6 +64,14 @@
                     params: { layoutId: msg[0] }
                 });
 //                debugger;
+            },
+            logError(msg){
+                console.log(msg);
+                this.$router.push({
+                    name: 'errorPage',
+                    params: { errorMessage: msg }
+                });
+
             }
         }
     }

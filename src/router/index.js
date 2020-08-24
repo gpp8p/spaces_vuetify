@@ -4,6 +4,7 @@ import Bar from '../components/Bar.vue'
 import gridLayout from "../components/gridLayout";
 import Dtable from "../components/dtable.vue";
 import displayLayout from "../components/displayLayout.vue"
+import errorPage from "../components/errorPage.vue"
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ Vue.use(VueRouter)
       path: '/displayLayout/:layoutId',
       name: 'displayLayout',
       component: displayLayout
+    },
+    {
+      path:'/logError/:errorMessage',
+      name:'errorPage',
+      component: errorPage
     },
     {
       path: '/Bar',
