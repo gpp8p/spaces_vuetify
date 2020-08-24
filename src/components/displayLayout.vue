@@ -104,12 +104,31 @@
                         response.data.layout.backgroundColor
                     );
                     this.LayoutPermissions = response.data.perms;
+                    if(this.canView(this.LayoutPermissions)){
+                        console.log('permissions Ok');
+                    }else{
+                        this.$router.push({
+                            name: 'errorPage',
+                            params: { errorMessage: 'You do not have permission to access that page' }
+                        });
+                    }
                     store.commit('setPerms', response.data.perms);
                     this.$emit('layoutChanged',[this.layoutId]);
                 }).catch(e => {
                     console.log(e);
                     this.errors.push(e);
                 });
+            },
+
+            canView(perms){
+
+                if(perms.admin) return true;
+                if(perms.author) return true;
+                if(perms.view) return true;
+
+
+//                console.log(perms);
+                return false;
             },
 
 
