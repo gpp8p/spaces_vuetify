@@ -18,6 +18,12 @@ Vue.use(VueRouter)
 
     },
     {
+      path: '/displayLayout/edit',
+      name: 'edit',
+      component: gridLayout
+
+    },
+    {
        path: '/table',
       name: 'table',
       component: Dtable

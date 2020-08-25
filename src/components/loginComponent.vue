@@ -160,6 +160,8 @@
                         store.commit('setOrgHome', response.data.orgHome);
                         store.commit('setLoggedInUserId', response.data.userId);
                         store.commit('setIsAdmin', response.data.is_admin);
+                        store.commit('setCurrentLayoutId', response.data.orgHome);
+                        store.commit('setPerms', response.data.loginPerms);
                         console.log('login successful');
                         console.log(response.data);
                         setStatus(this.LOGGED_IN);
