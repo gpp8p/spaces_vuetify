@@ -19,8 +19,22 @@
         data(){
           return {
             menuItems: ['Edit','Table', 'Bar', 'Dialog'],
-            nextLayout:0
+            menuItemsView: ['Info', 'Comments'],
+            menuItemsAuthor: ['Edit','Delete', 'Publish', 'Comments'],
+            menuItemsAdmin: ['Edit','Delete', 'Publish', 'Create', 'Child Pages', 'Comments'],
+            nextLayout:0,
+            topPerm:0,
+            VIEW_PERM:1,
+            AUTHOR_PERM:2,
+            ADMIN_PERM:3,
+            layoutPerms:{},
           }
+        },
+        created() {
+            this.$eventHub.$on('layoutChanged', this.layoutChanged);
+        },
+        beforeDestroy(){
+            this.$eventHub.$off('layoutChanged');
         },
         components: {menuComponent, loginComponent, contextArea},
         methods:{
@@ -36,6 +50,24 @@
             },
             logError(msg){
                 this.$emit('logError', msg);
+            },
+            layoutChanged(){
+                console.log('layoutChanged');
+                this.layoutPerms = this.$store.getters.getPerms;
+                if(this.layoutPerms.view) this.topPerm=this.VIEW_PERM;
+                if(this.layoutPerms.author) this.topPerm=this.AUTHOR_PERM;
+                if(this.layoutPerms.admin) this.topPerm=this.ADMIN_PERM;
+                switch(this.topPerm){
+                    case this.VIEW_PERM:
+                        this.menuItems = this.menuItemsView;
+                        break;
+                    case this.AUTHOR_PERM:
+                        this.menuItems = this.menuItemsAuthor;
+                        break;
+                    case this.ADMIN_PERM:
+                        this.menuItems = this.menuItemsAdmin;
+                        break;
+                }
             }
         }
     }

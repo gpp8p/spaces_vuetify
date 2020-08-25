@@ -24,7 +24,7 @@ export default {
     if(pathArray[0].length>0){
       store.commit('setDefaultOrg', pathArray[0]);
     }else{
-      store.commit('setDefaultOrg', ['Shannon']);
+      store.commit('setDefaultOrg', 'Shannon');
     }
 
   },

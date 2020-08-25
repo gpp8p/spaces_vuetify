@@ -7,7 +7,7 @@ import vuetify from './plugins/vuetify';
 Vue.config.productionTip = false;
 import constPlugin from "./constants/constPlugin";
 Vue.use(constPlugin);
-
+Vue.prototype.$eventHub = new Vue();
 
 new Vue({
   router,

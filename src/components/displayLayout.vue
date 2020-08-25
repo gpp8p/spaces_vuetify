@@ -114,6 +114,7 @@
                     }
                     store.commit('setPerms', response.data.perms);
                     this.$emit('layoutChanged',[this.layoutId]);
+                    this.$eventHub.$emit('layoutChanged');
                 }).catch(e => {
                     console.log(e);
                     this.errors.push(e);
