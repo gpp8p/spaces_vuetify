@@ -4,6 +4,7 @@ import Bar from '../components/Bar.vue'
 import gridLayout from "../components/gridLayout";
 import Dtable from "../components/dtable.vue";
 import displayLayout from "../components/displayLayout.vue"
+import editLayout from "../components/editLayout.vue";
 import errorPage from "../components/errorPage.vue"
 
 Vue.use(VueRouter)
@@ -12,15 +13,27 @@ Vue.use(VueRouter)
 
 
     {
-      path: '/edit',
-      name: 'edit',
+      path: '/test',
+      name: 'test',
       component: gridLayout
 
     },
     {
-      path: '/displayLayout/edit',
-      name: 'edit',
+      path: '/displayLayout/test',
+      name: 'test',
       component: gridLayout
+
+    },
+    {
+      path: '/edit',
+      name: 'edit',
+      component: editLayout
+
+    },
+    {
+      path: '/displayLayout/edit/:layoutId',
+      name: 'edit',
+      component: editLayout
 
     },
     {

@@ -37,6 +37,12 @@
                 debugger;
                 switch(msg){
                     case 'Edit':{
+                        this.$router.push({
+                            name: 'edit',
+                            params: { layoutId: this.$store.getters.getCurrentLayoutId }
+                        })
+
+
                         this.openDialog=false;
                         this.$router.push('edit');
                         break;
