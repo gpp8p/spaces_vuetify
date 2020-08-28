@@ -2,7 +2,7 @@
 
         <span class="layoutScreen">
           <section class="navbar">
-              <header-bar @tabSelected="tabSelected" @login="login" @logError="logError"></header-bar>
+              <header-bar :message="message" @tabSelected="tabSelected" @login="login" @logError="logError"></header-bar>
           </section>
           <section class="content">
             <Dialog :dialog = 'openDialog'></Dialog>
@@ -19,6 +19,7 @@
     import headerBar from "../components/headerBar.vue";
 
 
+
 //    import CContainer from "../components/containerExample.vue";
 //    import menuComponent from "../components/menu.vue";
 //    import configComponent from "../components/configComponent";
@@ -30,6 +31,7 @@
         data(){
           return {
               openDialog: false,
+              message: ''
           }
         },
         methods: {

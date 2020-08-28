@@ -3,6 +3,7 @@
         <span class="contextArea"><context-area :layout="nextLayout"></context-area></span>
         <span class="tabArea">
             <menu-component :items='menuItems' @menuSelection="tabSelected"></menu-component>
+            <span class="messageArea">{{message}}</span>
         </span>
         <span class="loginArea"><login-component @login="login" @newLayout="newLayout" @logError="logError"></login-component></span>
 
@@ -16,25 +17,37 @@
     import contextArea from "../components/contextArea.vue";
     export default {
         name: "headerBar",
+        props:{
+          message: {
+              type: String,
+              required: true
+          }
+        },
         data(){
           return {
-            menuItems: ['Edit','Table', 'Bar', 'Dialog'],
-            menuItemsView: ['Info', 'Comments','Test'],
-            menuItemsAuthor: ['Edit','Delete', 'Publish', 'Comments','Test'],
-            menuItemsAdmin: ['Edit','Delete', 'Publish', 'Create', 'Child Pages', 'Comments','Test'],
+            menuItems: [],
+//            menuItemsView: ['Info', 'Comments','Test'],
+//            menuItemsAuthor: ['Edit','Delete', 'Publish', 'Comments','Test'],
+//            menuItemsAdmin: ['Edit','Delete', 'Publish', 'Create', 'Child Pages', 'Comments','Test'],
             nextLayout:0,
             topPerm:0,
             VIEW_PERM:1,
             AUTHOR_PERM:2,
             ADMIN_PERM:3,
             layoutPerms:{},
+            viewContext:0,
+            VIEW_VIEWING:0,
+            VIEW_EDITING:1,
+            VIEW_NEWCARD:2,
           }
         },
         created() {
             this.$eventHub.$on('layoutChanged', this.layoutChanged);
+            this.$eventHub.$on('editStatusChanged', this.editStatusChanged);
         },
         beforeDestroy(){
             this.$eventHub.$off('layoutChanged');
+            this.$eventHub.$off('editStatusChanged');
         },
         components: {menuComponent, loginComponent, contextArea},
         methods:{
@@ -53,12 +66,40 @@
             logError(msg){
                 this.$emit('logError', msg);
             },
+            editStatusChanged(msg){
+//                debugger;
+                console.log(msg);
+                switch(msg){
+                    case 'openEdit':{
+                        this.viewContext=this.VIEW_EDITING;
+                        break;
+                    }
+                }
+                this.menuItems=this.getMenuItems();
+            },
+            getMenuItems(){
+                debugger;
+                if(this.viewContext==this.VIEW_VIEWING){
+                    if(this.topPerm==this.VIEW_PERM){
+                        return ['Info', 'Comments','Test'];
+                    }else if(this.topPerm==this.AUTHOR_PERM){
+                        return ['Edit','Delete', 'Publish', 'Comments','Test'];
+                    }else if((this.topPerm==this.ADMIN_PERM)){
+                        return ['Edit','Delete', 'Publish', 'Create', 'Child Pages', 'Comments','Test'];
+                    }
+                }else if(this.viewContext==this.VIEW_EDITING){
+                    return ['New Card', 'Save', 'Cancel'];
+                }
+
+            },
             layoutChanged(){
                 console.log('layoutChanged');
                 this.layoutPerms = this.$store.getters.getPerms;
                 if(this.layoutPerms.view) this.topPerm=this.VIEW_PERM;
                 if(this.layoutPerms.author) this.topPerm=this.AUTHOR_PERM;
                 if(this.layoutPerms.admin) this.topPerm=this.ADMIN_PERM;
+                this.menuItems=this.getMenuItems();
+/*
                 switch(this.topPerm){
                     case this.VIEW_PERM:
                         this.menuItems = this.menuItemsView;
@@ -70,6 +111,7 @@
                         this.menuItems = this.menuItemsAdmin;
                         break;
                 }
+*/
             }
         }
     }
@@ -89,9 +131,16 @@
         height: 100%;
     }
     .tabArea {
+        display:grid;
+        grid-template-rows: 50% 50%;
         background-color: #ffcd90;
         color:white;
         height: 100%;
+    }
+    .messageArea{
+        display: flex;
+        justify-content: center;
+        color:blue;
     }
     .loginArea {
         background-color: #ffcd90;

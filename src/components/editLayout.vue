@@ -57,10 +57,12 @@
                 CANCELLAYOUTUPDATE:7,
                 CARDBEINGCONFIGED:8,
 
+
             }
         },
         mounted(){
             this.reloadLayout(this.$route.params.layoutId);
+            this.$eventHub.$emit('editStatusChanged','openEdit');
         },
         methods: {
             layoutGridParameters(height, width, backgroundColor) {
@@ -268,6 +270,38 @@
                     }
                 }
             },
+            checkClickPos(brClickRow, brClickCol, tlSelectRow, tlSelectCol){
+//      debugger;
+                if((brClickRow<tlSelectRow)||(brClickCol<tlSelectCol)){
+                    return false;
+                }else{
+                    return true;
+                }
+
+
+            },
+            fillSelectedCells(arr,tlCol,tlRow,brCol,brRow, colorToFill){
+                var topLeftCol = tlCol;
+                var topLeftRow = tlRow;
+                var bottomRightCol = brCol;
+                var bottomRightRow = brRow;
+                for(var i = 0; i<arr.length; i++){
+                    var thisCardCol = arr[i].card_position[1];
+                    var thisCardRow = arr[i].card_position[0];
+//        console.log('thisCardCol:'+thisCardCol+'topLeftCol:'+topLeftCol+'thisCardRow:'+thisCardRow+'topLeftRow:'+topLeftRow);
+//        console.log('thisCardCol:'+thisCardCol+'bottomRightCol:'+bottomRightCol+'thisCardRow:'+thisCardRow+'bottomRightRow:'+bottomRightRow);
+//        console.log(arr[i].id);
+//        console.log('-----------------------------')
+                    if(thisCardCol >= topLeftCol && thisCardRow >= topLeftRow && thisCardCol <= bottomRightCol && thisCardRow <= bottomRightRow){
+//          console.log('card matched');
+                        this.$refs.key[i].$el.style.backgroundColor=colorToFill;
+                    }
+
+                }
+//      console.log('done');
+            },
+
+
 // end of methods
         },
 
