@@ -6,6 +6,7 @@
                           :card-key=cardKey
                           :card-position=cardPosition
                           :cardProperties = cardProperties
+                          :displayStatus = displayStatus
                           @cardClick="processCardClick"
                           @configurationHasBeenSaved="configurationHasBeenSaved"
                           @cardDataLoaded="cardDataLoaded"
@@ -133,4 +134,5 @@
         width:100%;
 
     }
+
 </style>

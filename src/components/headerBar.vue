@@ -74,6 +74,10 @@
                         this.viewContext=this.VIEW_EDITING;
                         break;
                     }
+                    case 'cancelEdit':{
+                        this.viewContext=this.VIEW_VIEWING;
+                        break;
+                    }
                 }
                 this.menuItems=this.getMenuItems();
             },
@@ -88,7 +92,7 @@
                         return ['Edit','Delete', 'Publish', 'Create', 'Child Pages', 'Comments','Test'];
                     }
                 }else if(this.viewContext==this.VIEW_EDITING){
-                    return ['New Card', 'Save', 'Cancel'];
+                    return ['New Card', 'Save', 'Cancel Edit'];
                 }
 
             },

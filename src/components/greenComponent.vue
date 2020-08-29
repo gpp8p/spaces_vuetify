@@ -1,6 +1,16 @@
 <template>
   <div v-on:click="cellClicked" >
+    <div class="cardStyle">
+      <div class="cardHeader" v-if="displayStatus==false">
+        <span class="textLeft">
+          <a href="#" v-on:click="cellClicked" >Configure</a>
+        </span>
+        <span class="textRight">
+          <a href="#"  v-on:click="editClicked" >Edit</a>
+        </span>
+      </div>
     {{ this.cardTitle }}
+    </div>
   </div>
 </template>
 
@@ -30,6 +40,10 @@ export default {
     cardProperties: {
       type: String,
       required: false
+    },
+    displayStatus: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
@@ -189,5 +203,31 @@ export default {
 .cardStyle {
   height: 100%;
   width: 100%;
+  overflow: auto;
 }
+.cardHeader {
+  height: 10%;
+  background-color: #fff722;
+  color: blue;
+  font-family: Geneva;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: bold;
+}
+.cardBody {
+  height: 90%;
+  margin:10px;
+}
+.textLeft {
+  margin-left: 5px;
+}
+
+.textRight {
+  margin-left: 82%;
+}
+
+.textCenter {
+  text-align: center;
+}
+
 </style>

@@ -38,6 +38,7 @@
                 unSelectedColor: 'rgb(219, 170, 110)',
                 layoutConfigurationValues: {},
                 LayoutPermissions:{},
+                displayStatus:true,
 
                 topLeftClicked: 0,
                 bottomRightClicked: 0,
@@ -62,6 +63,7 @@
         },
         mounted(){
             this.reloadLayout(this.$route.params.layoutId);
+            this.displayStatus=false;
             this.$eventHub.$emit('editStatusChanged','openEdit');
         },
         methods: {

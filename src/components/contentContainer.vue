@@ -6,7 +6,7 @@
           </section>
           <section class="content">
             <Dialog :dialog = 'openDialog'></Dialog>
-            <router-view></router-view>
+            <router-view @layoutChanged="testEmit"></router-view>
           </section>
 
         </span>
@@ -49,6 +49,14 @@
                         this.$router.push('edit');
                         break;
                     }
+                    case 'Cancel Edit':{
+                        this.$eventHub.$emit('editStatusChanged', 'cancelEdit');
+                        this.$router.push({
+                            name: 'displayLayout',
+                            params: { layoutId: this.$store.getters.getCurrentLayoutId }
+                        })
+                        break;
+                    }
                     case 'Table':{
                         this.openDialog=false;
                         this.$router.push('table');
@@ -80,6 +88,9 @@
                     params: { errorMessage: msg }
                 });
 
+            },
+            testEmit(msg){
+                console.log('router view caught:', msg);
             }
         }
     }
