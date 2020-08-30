@@ -49,6 +49,10 @@
                         this.$router.push('edit');
                         break;
                     }
+                    case 'New Card':{
+                        this.$eventHub.$emit('editStatusChanged', ['newCard',0]);
+                        break;
+                    }
                     case 'Cancel Edit':{
                         this.$eventHub.$emit('editStatusChanged', 'cancelEdit');
                         this.$router.push({

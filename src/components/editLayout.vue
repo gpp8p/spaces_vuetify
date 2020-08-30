@@ -40,6 +40,7 @@
                 LayoutPermissions:{},
                 displayStatus:true,
 
+                newCardBeingAdded:false,
                 topLeftClicked: 0,
                 bottomRightClicked: 0,
                 cstatus: 0,
@@ -61,6 +62,13 @@
 
             }
         },
+        created() {
+            this.$eventHub.$on('editStatusChanged', this.editStatusChanged);
+        },
+        beforeDestroy(){
+            this.$eventHub.$off('editStatusChanged');
+        },
+
         mounted(){
             this.reloadLayout(this.$route.params.layoutId);
             this.displayStatus=false;
@@ -223,8 +231,11 @@
 
             },
             processClick(msg) {
+                if(!this.newCardBeingAdded){
+                    return;
+                }
                 console.log('editLayout gets storeValue -' + msg);
-                debugger;
+  //              debugger;
                 var cardThatWasClicked = this.findCard(msg[0]);
                 console.log('cardThatWasClicked:'+cardThatWasClicked);
                 switch(this.cstatus){
@@ -263,6 +274,7 @@
                         this.cstatus = this.WAITINGFORTYPE;
                         break;
                 }
+                this.$eventHub.$emit('editStatusChanged', ['newCard',this.cstatus]);
 
             },
             findCard(cardId){
@@ -302,6 +314,19 @@
                 }
 //      console.log('done');
             },
+            editStatusChanged(msg){
+//                console.log(msg);
+                switch(msg[0]){
+                    case 'newCard':
+                        switch(msg[1]){
+                            case this.WAITINGFORCLICK:
+                                this.newCardBeingAdded = true;
+                                this.cstatus=this.WAITINGFORCLICK;
+                                break;
+                        }
+                    break;
+                }
+            }
 
 
 // end of methods
