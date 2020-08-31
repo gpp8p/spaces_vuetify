@@ -2,7 +2,7 @@
     <div class="hdrBarDiv">
         <span class="contextArea"><context-area :layout="nextLayout"></context-area></span>
         <span class="tabArea">
-            <menu-component :items='menuItems' @menuSelection="tabSelected"></menu-component>
+            <menu-component :items='menuItems' :selected-item="this.selectedMenuItem" @menuSelection="tabSelected"></menu-component>
             <span class="messageArea">{{this.message}}</span>
         </span>
         <span class="loginArea"><login-component @login="login" @newLayout="newLayout" @logError="logError"></login-component></span>
@@ -22,6 +22,7 @@
         data(){
           return {
             menuItems: [],
+            selectedMenuItem:-1,
             message:'',
 //            menuItemsView: ['Info', 'Comments','Test'],
 //            menuItemsAuthor: ['Edit','Delete', 'Publish', 'Comments','Test'],

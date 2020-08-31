@@ -1,7 +1,14 @@
 <template>
-    <span class="layoutMenuItem" @click="itemClicked">
-        {{itemLabel}}
+    <span>
+        <span @click="itemClicked" class="layoutMenuItem" v-if="itemIndex!=selectedItemIndex">
+            {{itemLabel}}
+        </span>
+        <span @click="itemClicked" class="layoutMenuItem selectedItem" v-if="itemIndex===selectedItemIndex">
+            {{itemLabel}}
+        </span>
+
     </span>
+
 </template>
 
 <script>
@@ -11,13 +18,30 @@
             itemLabel:{
                 type: String,
                 required: true
+            },
+            itemIndex:{
+                type: Number,
+                required: true
+            },
+            selectedItemIndex:{
+                type: Number,
+                required: true
             }
         },
-        methods:{
-            itemClicked(){
+        methods: {
+            itemClicked() {
                 this.$emit('menuSelection', [this.itemLabel]);
+            },
+            menuItemSelectedClass(){
+                console.log('menuItemSelectedClass');
+                if(this.itemIndex==this.selectedItemIndex){
+                    return 'layoutMenuItem';
+                }else{
+                    return 'layoutMenuItem';
+                }
             }
-        }
+        },
+
     }
 </script>
 
@@ -30,8 +54,13 @@
     }
     .layoutMenuItem:hover {
         background-color: #fff722;
-        color:red;
+        color: #1132ff;
     }
+    .selectedItem {
+        color: red;
+    }
+
+
 
 
 </style>

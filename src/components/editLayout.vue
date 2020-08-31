@@ -19,14 +19,14 @@
                 @linkHelperRequested="linkHelperRequested"
                 ref="key"
         ></generic-card>
-        <Dialog :dialog = 'openDialog'></Dialog>
+        <Dialog :dialog = 'openDialog' @menuSelection="dialogMenuSelected"></Dialog>
     </div>
 </template>
 
 <script>
     import axios from "axios";
     import genericCard from '../components/genericCard.vue';
-    import Dialog from "../components/cardConfigDialog.vue";
+    import Dialog from "./cardConfigDialog.vue";
     export default {
         name: "editLayout",
         components:{genericCard, Dialog},
@@ -329,7 +329,28 @@
                         }
                     break;
                 }
-            }
+            },
+            dialogMenuSelected(msg){
+               switch(msg[0]){
+                   case 'Cancel':
+                       this.cancelLayoutEdit();
+                       this.newCardBeingAdded=false;
+                       this.openDialog=false;
+                       break;
+               }
+            },
+            cancelLayoutEdit(){
+//      console.log('noButton clicked');
+                this.cstatus = this.WAITINGFORCLICK;
+                this.scolor = this.unSelectedColor;
+//      debugger;
+                if(this.bottomRightCol==0 && this.bottomRightRow==0){
+                    this.fillInOneCell(this.cardInstances, this.topLeftRow, this.topLeftCol, this.unSelectedColor);
+                }else{
+                    this.fillSelectedCells(this.cardInstances,this.topLeftCol,this.topLeftRow,this.bottomRightCol,this.bottomRightRow, this.unSelectedColor);
+                }
+
+            },
 
 
 // end of methods

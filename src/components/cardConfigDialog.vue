@@ -5,55 +5,65 @@
                 v-model="dialog"
                 width="800"
         >
-            <v-card color="orange"
+            <v-card color="#ffcd90"
                     elevation="15"
-                    height="300">
-                <v-card-title class="headline">Configure New Card</v-card-title>
-
-                <v-card-actions>
-
-                    <v-btn
-                            color="purple"
-                            text
-                    >
-                        Card Type
-                    </v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                            color="purple"
-                            text
-                    >
-                        Card Characteristics
-                    </v-btn>
-
-                    <v-spacer></v-spacer>
-                    <v-btn
-                            color="purple"
-                            text
-                    >
-                        Text
-                    </v-btn>
-
-                </v-card-actions>
-
-
+                    height="300"
+                    class="cardConfig">
+                <span class="titleClass">
+                    Configure New Card
+                </span>
+                <span>Content here</span>
+                <span>
+                    <menu-component :items='menuItems' :selected-item="this.selectedMenuItem" @menuSelection="tabSelected"></menu-component>
+                </span>
             </v-card>
         </v-dialog>
     </v-row>
 </template>
 
 <script>
+    import menuComponent from "../components/menuComponent.vue";
     export default {
         name: "cardConfigDialog",
+        components: {menuComponent},
+        mounted(){
+            this.selectedMenuItem = 0;
+        },
         props:{
             dialog:{
                 type: Boolean,
-                required: true
+                required: true,
+            }
+        },
+        data(){
+            return {
+                menuItems: ['Card Type', 'Appearence', 'Fonts', 'Save', 'Cancel'],
+                selectedMenuItem:0
+            }
+        },
+        methods:{
+            tabSelected(msg){
+                switch(msg[0]){
+                    case 'Cancel':
+                        this.dialog=false;
+                        this.$emit('menuSelection', [msg[0]]);
+                }
+
             }
         }
     }
 </script>
 
 <style scoped>
-
+.cardConfig{
+    display:grid;
+    grid-template-rows: 20% 60% 20%;
+}
+.titleClass{
+    margin-left: 40%;
+    font-size: large;
+    font-family: Arial;
+    font-weight: bold;
+    color: blue;
+}
 </style>
