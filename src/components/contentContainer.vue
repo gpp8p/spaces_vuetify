@@ -54,7 +54,7 @@
                         break;
                     }
                     case 'Cancel Edit':{
-                        this.$eventHub.$emit('editStatusChanged', 'cancelEdit');
+                        this.$eventHub.$emit('editStatusChanged', ['cancelEdit',0]);
                         this.$router.push({
                             name: 'displayLayout',
                             params: { layoutId: this.$store.getters.getCurrentLayoutId }

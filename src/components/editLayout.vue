@@ -19,16 +19,17 @@
                 @linkHelperRequested="linkHelperRequested"
                 ref="key"
         ></generic-card>
-
+        <Dialog :dialog = 'openDialog'></Dialog>
     </div>
 </template>
 
 <script>
     import axios from "axios";
     import genericCard from '../components/genericCard.vue';
+    import Dialog from "../components/cardConfigDialog.vue";
     export default {
         name: "editLayout",
-        components:{genericCard},
+        components:{genericCard, Dialog},
         data(){
             return {
                 cardInstances: [],
@@ -39,6 +40,7 @@
                 layoutConfigurationValues: {},
                 LayoutPermissions:{},
                 displayStatus:true,
+                openDialog:false,
 
                 newCardBeingAdded:false,
                 topLeftClicked: 0,
@@ -72,7 +74,7 @@
         mounted(){
             this.reloadLayout(this.$route.params.layoutId);
             this.displayStatus=false;
-            this.$eventHub.$emit('editStatusChanged','openEdit');
+            this.$eventHub.$emit('editStatusChanged',['openEdit',0]);
         },
         methods: {
             layoutGridParameters(height, width, backgroundColor) {
@@ -263,6 +265,7 @@
 //            this.cardInstances.forEach(this.fillInCell);
                             this.fillSelectedCells(this.cardInstances,this.topLeftCol,this.topLeftRow,this.bottomRightCol,this.bottomRightRow, '#66bb6a');
                             this.$emit('layoutMessage', ['bottomRight', this.bottomRightRow,this.bottomRightCol ]);
+                            this.openDialog=true;
                         }else{
                             this.$emit('layoutMessage', ['error', 'You must click and to the right',0 ]);
                         }

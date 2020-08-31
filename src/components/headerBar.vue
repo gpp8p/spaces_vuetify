@@ -3,7 +3,7 @@
         <span class="contextArea"><context-area :layout="nextLayout"></context-area></span>
         <span class="tabArea">
             <menu-component :items='menuItems' @menuSelection="tabSelected"></menu-component>
-            <span class="messageArea">{{message}}</span>
+            <span class="messageArea">{{this.message}}</span>
         </span>
         <span class="loginArea"><login-component @login="login" @newLayout="newLayout" @logError="logError"></login-component></span>
 
@@ -18,14 +18,11 @@
     export default {
         name: "headerBar",
         props:{
-          message: {
-              type: String,
-              required: true
-          }
         },
         data(){
           return {
             menuItems: [],
+            message:'',
 //            menuItemsView: ['Info', 'Comments','Test'],
 //            menuItemsAuthor: ['Edit','Delete', 'Publish', 'Comments','Test'],
 //            menuItemsAdmin: ['Edit','Delete', 'Publish', 'Create', 'Child Pages', 'Comments','Test'],
@@ -39,6 +36,17 @@
             VIEW_VIEWING:0,
             VIEW_EDITING:1,
             VIEW_NEWCARD:2,
+
+              WAITINGFORCLICK:0,
+              TOPLEFTCLICKED:1,
+              BOTTOMRIGHTCLICKED:2,
+              SELECTAREAOK:3,
+              WAITINGFORNAME:4,
+              WAITINGFORTYPE:5,
+              WAITINGFORSUBMIT:6,
+              WAITINGTOSAVE:8,
+              CANCELLAYOUTUPDATE:7,
+              CARDBEINGCONFIGED:8,
           }
         },
         created() {
@@ -67,9 +75,9 @@
                 this.$emit('logError', msg);
             },
             editStatusChanged(msg){
-//                debugger;
+                debugger;
                 console.log(msg);
-                switch(msg){
+                switch(msg[0]){
                     case 'openEdit':{
                         this.viewContext=this.VIEW_EDITING;
                         break;
@@ -78,6 +86,16 @@
                         this.viewContext=this.VIEW_VIEWING;
                         break;
                     }
+                    case 'newCard':
+                        switch(msg[1]){
+                            case this.WAITINGFORCLICK:
+//                                debugger;
+                                this.message = "Please identify top right corner of card by clicking on an empty tile";
+                                break;
+                            case this.TOPLEFTCLICKED:
+                                this.message = ""
+                        }
+                        break;
                 }
                 this.menuItems=this.getMenuItems();
             },
