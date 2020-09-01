@@ -15,6 +15,10 @@
                 <span v-if="selectedMenuItem==this.VIEW_TYPE_SELECTION">
                     <card-type-selection></card-type-selection>
                 </span>
+                <span v-if="selectedMenuItem==this.VIEW_APPEARENCE">
+                    <CardAppearenceSet></CardAppearenceSet>
+                </span>
+
                 <span>
                     <menu-component :items='menuItems' :selected-item="this.selectedMenuItem" @menuSelection="tabSelected"></menu-component>
                 </span>
@@ -26,9 +30,10 @@
 <script>
     import menuComponent from "../components/menuComponent.vue";
     import cardTypeSelection from "../components/cardTypeSelection.vue";
+    import CardAppearenceSet from "../components/CardAppearenceSet.vue";
     export default {
         name: "cardConfigDialog",
-        components: {menuComponent, cardTypeSelection},
+        components: {menuComponent, cardTypeSelection, CardAppearenceSet},
         mounted(){
             this.selectedMenuItem = 0;
         },
@@ -53,6 +58,13 @@
                     case 'Cancel':
                         this.dialog=false;
                         this.$emit('menuSelection', [msg[0]]);
+                        break;
+                    case 'Card Type':
+                        this.selectedMenuItem=this.VIEW_TYPE_SELECTION;
+                        break;
+                    case 'Appearence':
+                        this.selectedMenuItem=this.VIEW_APPEARENCE;
+                        break;
                 }
 
             }
