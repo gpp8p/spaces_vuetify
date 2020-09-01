@@ -12,7 +12,9 @@
                 <span class="titleClass">
                     Configure New Card
                 </span>
-                <span>Content here</span>
+                <span v-if="selectedMenuItem==this.VIEW_TYPE_SELECTION">
+                    <card-type-selection></card-type-selection>
+                </span>
                 <span>
                     <menu-component :items='menuItems' :selected-item="this.selectedMenuItem" @menuSelection="tabSelected"></menu-component>
                 </span>
@@ -23,9 +25,10 @@
 
 <script>
     import menuComponent from "../components/menuComponent.vue";
+    import cardTypeSelection from "../components/cardTypeSelection.vue";
     export default {
         name: "cardConfigDialog",
-        components: {menuComponent},
+        components: {menuComponent, cardTypeSelection},
         mounted(){
             this.selectedMenuItem = 0;
         },
@@ -38,7 +41,10 @@
         data(){
             return {
                 menuItems: ['Card Type', 'Appearence', 'Fonts', 'Save', 'Cancel'],
-                selectedMenuItem:0
+                selectedMenuItem:0,
+                VIEW_TYPE_SELECTION:0,
+                VIEW_APPEARENCE:1,
+                VIEW_FONTS:2
             }
         },
         methods:{
