@@ -36,7 +36,7 @@
         },
         methods: {
             tabSelected(msg){
-                debugger;
+//                debugger;
                 switch(msg){
                     case 'Edit':{
                         this.$router.push({

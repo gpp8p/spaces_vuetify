@@ -64,7 +64,7 @@
                 this.$emit('tabSelected', msg[0]);
             },
             login(msg){
-                debugger;
+//                debugger;
                 this.layoutChanged();
                 this.$emit('login', [msg[0]]);
             },
@@ -76,7 +76,7 @@
                 this.$emit('logError', msg);
             },
             editStatusChanged(msg){
-                debugger;
+//                debugger;
                 console.log(msg);
                 switch(msg[0]){
                     case 'openEdit':{
@@ -101,7 +101,7 @@
                 this.menuItems=this.getMenuItems();
             },
             getMenuItems(){
-                debugger;
+//                debugger;
                 if(this.viewContext==this.VIEW_VIEWING){
                     if(this.topPerm==this.VIEW_PERM){
                         return ['Info', 'Comments','Test'];

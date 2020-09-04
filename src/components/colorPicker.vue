@@ -34,7 +34,7 @@
 
             },
             getCurrentValue(){
-//        debugger;
+        debugger;
                 if(typeof(this.currentValues[this.configElement.element])=='undefined'){
                     return '#FFFFFF';
                 }else{

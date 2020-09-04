@@ -13,14 +13,14 @@
                     Configure New Card
                 </span>
                 <span v-if="selectedMenuItem==this.VIEW_TYPE_SELECTION">
-                    <card-type-selection></card-type-selection>
+                    <card-type-selection @typeSelected="typeSelected"></card-type-selection>
                 </span>
                 <span v-if="selectedMenuItem==this.VIEW_APPEARENCE">
-                    <CardAppearenceSet></CardAppearenceSet>
+                    <CardAppearenceSet :currentValues="currentCardValues"></CardAppearenceSet>
                 </span>
 
                 <span>
-                    <menu-component :items='menuItems' :selected-item="this.selectedMenuItem" @menuSelection="tabSelected"></menu-component>
+                    <menu-component :items='this.menuItems' :selected-item="this.selectedMenuItem" @menuSelection="tabSelected"></menu-component>
                 </span>
             </v-card>
         </v-dialog>
@@ -34,22 +34,39 @@
     export default {
         name: "cardConfigDialog",
         components: {menuComponent, cardTypeSelection, CardAppearenceSet},
+        created(){
+            console.log('cardConfigDialog created. newcard', this.newCard);
+            if(this.newCard==false){
+                this.menuItems = this.initialMenuItems;
+            }else{
+                this.menuItems = this.fullMenuItems;
+            }
+        },
         mounted(){
             this.selectedMenuItem = 0;
+
         },
         props:{
             dialog:{
                 type: Boolean,
                 required: true,
+            },
+            newCard:{
+                type: Boolean,
+                required: true
             }
         },
         data(){
             return {
-                menuItems: ['Card Type', 'Appearence', 'Fonts', 'Save', 'Cancel'],
+                menuItems: [],
+                initialMenuItems: ['CardType','Cancel'],
+                fullMenuItems: ['Card Type', 'Appearence', 'Fonts', 'Save', 'Cancel'],
                 selectedMenuItem:0,
                 VIEW_TYPE_SELECTION:0,
                 VIEW_APPEARENCE:1,
-                VIEW_FONTS:2
+                VIEW_FONTS:2,
+                currentCardValues:{}
+
             }
         },
         methods:{
@@ -67,6 +84,10 @@
                         break;
                 }
 
+            },
+            typeSelected(msg){
+                console.log('type has been selected', msg);
+                this.menuItems=this.fullMenuItems;
             }
         }
     }

@@ -21,6 +21,12 @@
     export default {
         name: "CardAppearenceSet",
         components: {backgroundPicker},
+        props :{
+            currentValues:{
+                type: Object,
+                required: false
+            }
+        }
     }
 </script>
 

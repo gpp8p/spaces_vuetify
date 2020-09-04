@@ -19,7 +19,7 @@
                 @linkHelperRequested="linkHelperRequested"
                 ref="key"
         ></generic-card>
-        <Dialog :dialog = 'openDialog' @menuSelection="dialogMenuSelected"></Dialog>
+        <Dialog :dialog = 'openDialog' :newCard='newCardBeingAdded' @menuSelection="dialogMenuSelected"></Dialog>
     </div>
 </template>
 
@@ -41,6 +41,7 @@
                 LayoutPermissions:{},
                 displayStatus:true,
                 openDialog:false,
+
 
                 newCardBeingAdded:false,
                 topLeftClicked: 0,
@@ -98,7 +99,7 @@
                 return gridCss;
             },
             reloadLayout: function (layoutId) {
-                debugger;
+//                debugger;
                 this.cardInstances = [];
                 this.displayGrid = true;
 //                this.layoutId = msg;
@@ -171,7 +172,7 @@
 
                     })
                     .catch(e => {
-                        debugger;
+//                        debugger;
                         console.log(e);
                         this.errors.push(e);
                     });

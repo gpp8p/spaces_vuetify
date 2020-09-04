@@ -1,6 +1,6 @@
 <template>
     <span class="cardTypeSpan">
-                <v-select
+                <v-select @change="typeSelected"
                         :items="items"
                         label="Select Card Type:"
                         outlined
@@ -14,6 +14,12 @@
         data(){
             return {
                 items: ['Headline Card', 'Text Card']
+            }
+        },
+        methods:{
+            typeSelected(msg){
+                console.log('type selected', msg);
+                this.$emit('typeSelected', msg);
             }
         }
 
