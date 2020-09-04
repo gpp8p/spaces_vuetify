@@ -10,8 +10,8 @@
         props: {
             currentValues:{
                 type: Object,
-                required: false
-            }
+                required: true
+            },
 
         },
 
@@ -35,10 +35,10 @@
             },
             getCurrentValue(){
         debugger;
-                if(typeof(this.currentValues[this.configElement.element])=='undefined'){
+                if(typeof(this.currentValues["backgroundColor"])=='undefined'){
                     return '#FFFFFF';
                 }else{
-                    return this.currentValues[this.configElement.element];
+                    return this.currentValues["backgroundColor"];
                 }
             }
 

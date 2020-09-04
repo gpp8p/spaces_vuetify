@@ -8,7 +8,7 @@
         </span>
         <span v-if="this.backgroundTypeSelection > 0" class="pickers">
             <span v-if="this.backgroundTypeSelection==this.COLOR_SELECTED">
-                <color-picker></color-picker>
+                <color-picker :currentValues="currentValues" ></color-picker>
             </span>
             <span v-if="this.backgroundTypeSelection==this.IMAGE_SELECTED" class="imageSelectorStyle">
                 image selected
@@ -22,12 +22,19 @@
     export default {
         name: "backgroundPicker",
         components:{colorPicker},
+        props:{
+          currentValues: {
+              type: Object,
+              required: true
+          }
+        },
         data(){
           return {
               backgroundTypeSelection:0,
               NOTHING_SELECTED:0,
               COLOR_SELECTED:1,
-              IMAGE_SELECTED:2
+              IMAGE_SELECTED:2,
+              val: ''
           }
         },
         methods:{

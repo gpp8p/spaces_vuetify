@@ -86,8 +86,10 @@
 
             },
             typeSelected(msg){
-                console.log('type has been selected', msg);
+                debugger;
+                console.log('configDialog - type has been selected', msg);
                 this.menuItems=this.fullMenuItems;
+                this.currentCardValues=msg[1];
             }
         }
     }

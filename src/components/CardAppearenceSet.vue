@@ -1,7 +1,7 @@
 <template>
     <span class="cardAppearenceWrapper">
         <span class="backgroundPick">
-            <background-picker></background-picker>
+            <background-picker :currentValues="currentValues"></background-picker>
         </span>
         <span class="borderPick">
             border picker here

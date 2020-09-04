@@ -13,13 +13,56 @@
         name: "cardTypeSection",
         data(){
             return {
-                items: ['Headline Card', 'Text Card']
+                items: ['Headline Card', 'Text Card'],
+                headlineCardDefaults:{
+                    "backgroundTypeColor":'checked',
+                    "backgroundColor":"#FFFFFF",
+                    "fontSize":"12pt",
+                    "fontWeight":"bold",
+                    "border":"checked",
+                    "borderColor":"#cc0521",
+                    "borderSize":"medium",
+                    "shadow":"checked",
+                    "shadowSize":"10px",
+                    "shadowSizeSetAt":"10px",
+                    "shadowColor":"#BBBBBB",
+                    "fontFamily":"Helvetica",
+                    "fontStyle":"oblique",
+                    "textAlign":"left",
+                    "color":"#0537aa"
+                },
+                textCardDefaults:{
+                    "backgroundTypeColor":'checked',
+                    "backgroundColor":"#FFFFFF",
+                    "fontSize":"12pt",
+                    "fontWeight":"bold",
+                    "border":"checked",
+                    "borderColor":"#cc0521",
+                    "borderSize":"medium",
+                    "shadow":"checked",
+                    "shadowSize":"10px",
+                    "shadowSizeSetAt":"10px",
+                    "shadowColor":"#BBBBBB",
+                    "fontFamily":"Helvetica",
+                    "fontStyle":"oblique",
+                    "textAlign":"left",
+                    "color":"#0537aa"
+                }
             }
         },
         methods:{
             typeSelected(msg){
                 console.log('type selected', msg);
-                this.$emit('typeSelected', msg);
+                switch(msg){
+                    case 'Headline Card':{
+                        this.$emit('typeSelected', [msg, this.headlineCardDefaults]);
+                        break;
+                    }
+                    case 'Text Card':{
+                        this.$emit('typeSelected', [msg, this.textCardDefaults]);
+                        break;
+                    }
+                }
             }
         }
 
