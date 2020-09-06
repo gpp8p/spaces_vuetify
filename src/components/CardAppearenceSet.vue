@@ -1,7 +1,7 @@
 <template>
     <span class="cardAppearenceWrapper">
         <span class="backgroundPick">
-            <background-picker :currentValues="currentValues"></background-picker>
+            <background-picker :currentValues="currentValues" @selectedValue="selectedValue"></background-picker>
         </span>
         <span class="borderPick">
             border picker here
@@ -25,6 +25,12 @@
             currentValues:{
                 type: Object,
                 required: false
+            }
+        },
+        methods:{
+            selectedValue(msg){
+                debugger;
+                this.$emit('selectedValue', msg);
             }
         }
     }

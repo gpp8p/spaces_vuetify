@@ -11,6 +11,12 @@
 <script>
     export default {
         name: "cardTypeSection",
+        created() {
+            this.$eventHub.$on('configSaved', this.configSaved);
+        },
+        beforeDestroy(){
+            this.$eventHub.$off('configSaved');
+        },
         data(){
             return {
                 items: ['Headline Card', 'Text Card'],
@@ -47,12 +53,14 @@
                     "fontStyle":"oblique",
                     "textAlign":"left",
                     "color":"#0537aa"
-                }
+                },
+                selectedValue:''
             }
         },
         methods:{
             typeSelected(msg){
                 console.log('type selected', msg);
+                this.selectedValue = msg;
                 switch(msg){
                     case 'Headline Card':{
                         this.$emit('typeSelected', [msg, this.headlineCardDefaults]);
@@ -63,7 +71,8 @@
                         break;
                     }
                 }
-            }
+                this.$emit('selectedValue', ['cardType', this.selectedValue]);
+            },
         }
 
     }

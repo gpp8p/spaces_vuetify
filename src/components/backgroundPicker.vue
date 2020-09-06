@@ -8,7 +8,7 @@
         </span>
         <span v-if="this.backgroundTypeSelection > 0" class="pickers">
             <span v-if="this.backgroundTypeSelection==this.COLOR_SELECTED">
-                <color-picker :currentValues="currentValues" ></color-picker>
+                <color-picker :currentValues="currentValues" @selectedValue="selectedValue"></color-picker>
             </span>
             <span v-if="this.backgroundTypeSelection==this.IMAGE_SELECTED" class="imageSelectorStyle">
                 image selected
@@ -41,10 +41,15 @@
             colorSelected(){
                 console.log('color has been selected');
                 this.backgroundTypeSelection = this.COLOR_SELECTED;
+                this.$emit('selectedValue', ['backgroundType',this.backgroundTypeSelection] );
             },
             imageSelected(){
                 console.log('image has been selected');
                 this.backgroundTypeSelection = this.IMAGE_SELECTED;
+                this.$emit('selectedValue', ['backgroundType',this.backgroundTypeSelection] );
+            },
+            selectedValue(msg){
+                this.$emit('selectedValue', msg);
             }
         }
     }

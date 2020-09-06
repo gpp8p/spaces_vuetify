@@ -14,10 +14,10 @@
             },
 
         },
-
         data(){
             return{
-                val:this.getCurrentValue()
+                val:this.getCurrentValue(),
+                selectedValue:'',
             }
         },
         watch:{
@@ -30,18 +30,16 @@
         methods:{
             newColor(evt){
                 console.log(evt.target.value);
-                this.$emit('configSelected', [evt.target.value]);
-
+                this.$emit('selectedValue', ['backgroundColor', evt.target.value]);
             },
             getCurrentValue(){
-        debugger;
+                //debugger;
                 if(typeof(this.currentValues["backgroundColor"])=='undefined'){
                     return '#FFFFFF';
                 }else{
                     return this.currentValues["backgroundColor"];
                 }
             }
-
         }
 
     }

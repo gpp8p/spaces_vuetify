@@ -13,10 +13,13 @@
                     Configure New Card
                 </span>
                 <span v-if="selectedMenuItem==this.VIEW_TYPE_SELECTION">
-                    <card-type-selection @typeSelected="typeSelected"></card-type-selection>
+                    <card-type-selection @typeSelected="typeSelected" @selectedValue="selectedValue"></card-type-selection>
                 </span>
                 <span v-if="selectedMenuItem==this.VIEW_APPEARENCE">
-                    <CardAppearenceSet :currentValues="currentCardValues"></CardAppearenceSet>
+                    <CardAppearenceSet :currentValues="currentCardValues" @selectedValue="selectedValue"></CardAppearenceSet>
+                </span>
+                <span v-if="selectedMenuItem==this.VIEW_SAVE">
+                    Card Save
                 </span>
 
                 <span>
@@ -65,6 +68,7 @@
                 VIEW_TYPE_SELECTION:0,
                 VIEW_APPEARENCE:1,
                 VIEW_FONTS:2,
+                VIEW_SAVE:4,
                 currentCardValues:{}
 
             }
@@ -82,6 +86,10 @@
                     case 'Appearence':
                         this.selectedMenuItem=this.VIEW_APPEARENCE;
                         break;
+                    case 'Save':
+                        this.selectedMenuItem = this.VIEW_SAVE;
+                        this.configurationSave();
+                        break;
                 }
 
             },
@@ -90,6 +98,47 @@
                 console.log('configDialog - type has been selected', msg);
                 this.menuItems=this.fullMenuItems;
                 this.currentCardValues=msg[1];
+            },
+            configurationSave(){
+
+            },
+            selectedValue(msg){
+                console.log(msg);
+                switch (msg[0]) {
+                    case "backgroundColor":
+                        this.currentCardValues.backgroundColor = msg[1];
+                        break;
+                    case "cardType":
+                        this.currentCardValues.cardType = msg[1];
+                        break;
+                    case "backgroundType":
+                        this.currentCardValues.backgroundType=msg[1];
+                        break;
+                    case "backgroundImage":
+                         break;
+                    case "fontFamily":
+                        break;
+                    case "fontSize":
+                        break;
+                    case "fontWeight":
+                        break;
+                    case "fontStyle":
+                        break;
+                    case "color":
+                        break;
+                    case "textAlign":
+                        break;
+                    case "roundIncluded":
+                        break;
+                    case "shadow":
+                        break;
+                    case "border":
+                        break;
+                    case "borderSize":
+                        break;
+                    case "borderColor":
+                        break;
+                }
             }
         }
     }
