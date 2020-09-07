@@ -115,6 +115,7 @@
                         this.currentCardValues.backgroundType=msg[1];
                         break;
                     case "backgroundImage":
+                        this.currentCardValues.backgroundImage=msg[1];
                          break;
                     case "fontFamily":
                         break;

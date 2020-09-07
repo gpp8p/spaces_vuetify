@@ -11,7 +11,7 @@
                 <color-picker :currentValues="currentValues" @selectedValue="selectedValue"></color-picker>
             </span>
             <span v-if="this.backgroundTypeSelection==this.IMAGE_SELECTED" class="imageSelectorStyle">
-                image selected
+                <file-upload :fileRole="this.fileRole" @selectedValue="selectedValue"></file-upload>
             </span>
         </span>
     </span>
@@ -19,9 +19,10 @@
 
 <script>
     import colorPicker from "../components/colorPicker.vue";
+    import fileUpload from "../components/fileUpload.vue";
     export default {
         name: "backgroundPicker",
-        components:{colorPicker},
+        components:{colorPicker, fileUpload},
         props:{
           currentValues: {
               type: Object,
@@ -34,7 +35,8 @@
               NOTHING_SELECTED:0,
               COLOR_SELECTED:1,
               IMAGE_SELECTED:2,
-              val: ''
+              val: '',
+              fileRole:"backgroundImage"
           }
         },
         methods:{
