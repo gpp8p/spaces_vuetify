@@ -134,8 +134,10 @@
                     case "shadow":
                         break;
                     case "border":
+                        this.currentCardValues.border=msg[1];
                         break;
                     case "borderSize":
+                        this.currentCardValues.borderSize=msg[1];
                         break;
                     case "borderColor":
                         break;

@@ -4,7 +4,7 @@
             <background-picker :currentValues="currentValues" @selectedValue="selectedValue"></background-picker>
         </span>
         <span class="borderPick">
-            border picker here
+            <border-picker @selectedValue="selectedValue"></border-picker>
         </span>
         <span class="shadowPick">
             shadow picker here
@@ -18,9 +18,10 @@
 
 <script>
     import backgroundPicker from "../components/backgroundPicker.vue";
+    import borderPicker from "../components/borderPicker.vue";
     export default {
         name: "CardAppearenceSet",
-        components: {backgroundPicker},
+        components: {backgroundPicker, borderPicker},
         props :{
             currentValues:{
                 type: Object,
