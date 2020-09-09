@@ -12,6 +12,10 @@
                 type: Object,
                 required: true
             },
+            pType:{
+                type:String,
+                required: true
+            }
 
         },
         data(){
@@ -30,14 +34,14 @@
         methods:{
             newColor(evt){
                 console.log(evt.target.value);
-                this.$emit('selectedValue', ['backgroundColor', evt.target.value]);
+                this.$emit('selectedValue', [this.pType, evt.target.value]);
             },
             getCurrentValue(){
                 //debugger;
-                if(typeof(this.currentValues["backgroundColor"])=='undefined'){
+                if(typeof(this.currentValues[this.pType])=='undefined'){
                     return '#FFFFFF';
                 }else{
-                    return this.currentValues["backgroundColor"];
+                    return this.currentValues[this.pType];
                 }
             }
         }

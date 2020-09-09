@@ -8,7 +8,7 @@
         </span>
         <span v-if="this.backgroundTypeSelection > 0" class="pickers">
             <span v-if="this.backgroundTypeSelection==this.COLOR_SELECTED">
-                <color-picker :currentValues="currentValues" @selectedValue="selectedValue"></color-picker>
+                <color-picker :currentValues="currentValues" :pType="pType" @selectedValue="selectedValue"></color-picker>
             </span>
             <span v-if="this.backgroundTypeSelection==this.IMAGE_SELECTED" class="imageSelectorStyle">
                 <file-upload :fileRole="this.fileRole" @selectedValue="selectedValue"></file-upload>
@@ -26,6 +26,10 @@
         props:{
           currentValues: {
               type: Object,
+              required: true
+          },
+          pType: {
+              type: String,
               required: true
           }
         },

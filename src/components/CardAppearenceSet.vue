@@ -1,16 +1,16 @@
 <template>
     <span class="cardAppearenceWrapper">
         <span class="backgroundPick">
-            <background-picker :currentValues="currentValues" @selectedValue="selectedValue"></background-picker>
+            <background-picker :currentValues="currentValues" :pType="backgroundColorType" @selectedValue="selectedValue"></background-picker>
         </span>
         <span class="borderPick">
-            <border-picker @selectedValue="selectedValue"></border-picker>
+            <border-picker :currentValues="currentValues" :pType="borderColorType" @selectedValue="selectedValue"></border-picker>
         </span>
         <span class="shadowPick">
-            shadow picker here
+            <shadow-picker :currentValues="currentValues" :pType="shadowType" @selectedValue="selectedValue"></shadow-picker>
         </span>
         <span class="roundCornerPick">
-            round corner picker here
+            <round-corner-picker :currentValues="currentValues" :pType="roundType" @selectedValue="selectedValue"></round-corner-picker>
         </span>
 
     </span>
@@ -19,14 +19,24 @@
 <script>
     import backgroundPicker from "../components/backgroundPicker.vue";
     import borderPicker from "../components/borderPicker.vue";
+    import shadowPicker from "../components/shadowPicker.vue"
+    import roundCornerPicker from "../components/roundCornerPicker.vue"
     export default {
         name: "CardAppearenceSet",
-        components: {backgroundPicker, borderPicker},
+        components: {backgroundPicker, borderPicker, shadowPicker, roundCornerPicker},
         props :{
             currentValues:{
                 type: Object,
                 required: false
             }
+        },
+        data(){
+          return {
+              backgroundColorType: "backgroundColor",
+              borderColorType: "borderColor",
+              shadowType: "shadow",
+              roundType: "roundIncluded"
+          }
         },
         methods:{
             selectedValue(msg){
