@@ -18,6 +18,9 @@
                 <span v-if="selectedMenuItem==this.VIEW_APPEARENCE">
                     <CardAppearenceSet :currentValues="currentCardValues" @selectedValue="selectedValue"></CardAppearenceSet>
                 </span>
+                <span v-if="selectedMenuItem==this.VIEW_FONTS">
+                    <text-appearence-set></text-appearence-set>
+                </span>
                 <span v-if="selectedMenuItem==this.VIEW_SAVE">
                     Card Save
                 </span>
@@ -34,9 +37,10 @@
     import menuComponent from "../components/menuComponent.vue";
     import cardTypeSelection from "../components/cardTypeSelection.vue";
     import CardAppearenceSet from "../components/CardAppearenceSet.vue";
+    import TextAppearenceSet from "../components/TextAppearenceSet.vue"
     export default {
         name: "cardConfigDialog",
-        components: {menuComponent, cardTypeSelection, CardAppearenceSet},
+        components: {menuComponent, cardTypeSelection, CardAppearenceSet, TextAppearenceSet},
         created(){
             console.log('cardConfigDialog created. newcard', this.newCard);
             if(this.newCard==false){
@@ -85,6 +89,9 @@
                         break;
                     case 'Appearence':
                         this.selectedMenuItem=this.VIEW_APPEARENCE;
+                        break;
+                    case 'Fonts':
+                        this.selectedMenuItem=this.VIEW_FONTS;
                         break;
                     case 'Save':
                         this.selectedMenuItem = this.VIEW_SAVE;
