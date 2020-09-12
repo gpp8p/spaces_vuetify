@@ -1,10 +1,16 @@
 <template>
     <span class="textAppearenceWrapper">
             <span class="fontFamilyCss">
-                Font Family
+                <span>
+                    <flex-font-select></flex-font-select>
+                </span>
             </span>
             <span class="fontColorCss">
-                Font Color
+                Font Color:
+                <span class="pickers">
+                    <color-picker :currentValues="currentValues" :pType="pType" @selectedValue="selectedValue"></color-picker>
+                </span>
+
             </span>
             <span class="fontSizeCss">
                 <font-size-picker @selectedValue="selectedValue"></font-size-picker>
@@ -27,16 +33,18 @@
     import fontWeightPicker from "../components/fontWeightPicker.vue";
     import fontStylePicker from "../components/fontStylePicker.vue";
     import fontAlignPicker from "../components/fontAlignPicker.vue"
+    import colorPicker from "../components/colorPicker.vue";
+    import flexFontSelect from "../components//flexFontSelect";
     export default {
         name: "TextAppearenceSet",
-        components: {fontSizePicker, fontWeightPicker, fontStylePicker, fontAlignPicker},
+        components: {fontSizePicker, fontWeightPicker, fontStylePicker, fontAlignPicker, colorPicker, flexFontSelect},
     }
 </script>
 
 <style scoped>
 
     .fontFamilyCss {
-
+        margin-top: 8px;
     }
     .fontSizeCss {
 
@@ -61,10 +69,10 @@
         height: 100%;
         margin-left: 5%;
 
-
-
     }
-
+    .pickers{
+        margin-top: 8px;
+    }
 
 
 </style>
