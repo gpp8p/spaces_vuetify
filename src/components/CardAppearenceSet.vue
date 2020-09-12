@@ -40,7 +40,7 @@
         },
         methods:{
             selectedValue(msg){
-                debugger;
+//                debugger;
                 this.$emit('selectedValue', msg);
             }
         }

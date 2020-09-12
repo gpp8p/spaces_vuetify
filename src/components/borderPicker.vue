@@ -52,6 +52,9 @@
                 this.$emit('selectedValue', ['border', true]);
                 this.$emit('selectedValue', ['borderSize', msg]);
             },
+            selectedValue(msg){
+                this.$emit('selectedValue', ['borderColor', msg[1]]);
+            }
         },
         watch:{
             checkbox: function(){

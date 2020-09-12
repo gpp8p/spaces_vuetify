@@ -2,13 +2,13 @@
     <span class="textAppearenceWrapper">
             <span class="fontFamilyCss">
                 <span>
-                    <flex-font-select></flex-font-select>
+                    <flex-font-select :currentValues="currentValues" :pType="fontFamilyType" @selectedValue="selectedValue"></flex-font-select>
                 </span>
             </span>
             <span class="fontColorCss">
                 Font Color:
                 <span class="pickers">
-                    <color-picker :currentValues="currentValues" :pType="pType" @selectedValue="selectedValue"></color-picker>
+                    <color-picker :currentValues="currentValues" :pType="colorType" @selectedValue="selectedValue"></color-picker>
                 </span>
 
             </span>
@@ -38,6 +38,25 @@
     export default {
         name: "TextAppearenceSet",
         components: {fontSizePicker, fontWeightPicker, fontStylePicker, fontAlignPicker, colorPicker, flexFontSelect},
+        props :{
+            currentValues:{
+                type: Object,
+                required: false
+            }
+        },
+        data(){
+          return {
+              colorType: "color",
+              fontFamilyType: "fontFamily"
+          }
+        },
+        methods:{
+            selectedValue(msg){
+//                debugger;
+                this.$emit('selectedValue', msg);
+            }
+        }
+
     }
 </script>
 

@@ -19,7 +19,7 @@
                     <CardAppearenceSet :currentValues="currentCardValues" @selectedValue="selectedValue"></CardAppearenceSet>
                 </span>
                 <span v-if="selectedMenuItem==this.VIEW_FONTS">
-                    <text-appearence-set></text-appearence-set>
+                    <text-appearence-set :currentValues="currentCardValues" @selectedValue="selectedValue"></text-appearence-set>
                 </span>
                 <span v-if="selectedMenuItem==this.VIEW_SAVE">
                     Card Save

@@ -3,7 +3,7 @@
           <span :style="{fontFamily : focused_font}">Font to use:</span>
             <select v-model="focused_font" class="selectStyle" ref="fontSelect" @change="fontSelected()">
                 <option value="" disabled selected class="optionStyle">Font</option>
-                <option v-for="(font, index) in available_fonts" :key="index" v-bind:value="font" :selected="font==focused_font" v-bind:style="{fontFamily : font}" class="optionStyle" >{{ font }}</option>
+                <option v-for="(font, index) in this.available_fonts" :key="index" v-bind:value="font" :selected="font==focused_font" v-bind:style="{fontFamily : font}" class="optionStyle" >{{ font }}</option>
             </select>
 
         </span>
@@ -16,18 +16,18 @@
   export default {
     name: "flexFontSelect",
     props: {
-      configElement: {
-        type: Object,
-        required: true
-      },
-      currentValues:{
-        type: Object,
-        required: false
-      }
-
+        currentValues:{
+            type: Object,
+            required: true
+        },
+        pType:{
+            type:String,
+            required: true
+        }
     },
     data(){
-      return{
+      return {
+        test: "test variable",
         available_fonts: ['Arial', 'Times New Roman', 'Helvetica','Times','Courier New','Verdana','Courier','Arial Narrow','Candara','Geneva','Calibri','Optima','Cambria','Garamond','Perpetua','Monaco','Didot','Brush Script MT','Lucida Bright','Copperplate'],
         focused_font:this.getCurrentValue(),
       }
@@ -42,14 +42,15 @@
     methods:{
       fontSelected(){
 //        debugger;
-        this.$emit('configSelected', [this.configElement.element, this.$refs.fontSelect.value]);
+        this.$emit('selectedValue', [this.pType, this.$refs.fontSelect.value]);
+//        this.$emit('configSelected', [this.configElement.element, this.$refs.fontSelect.value]);
       },
       getCurrentValue(){
 //        debugger;
-        if(typeof(this.currentValues[this.configElement.element])=='undefined'){
+        if(typeof(this.currentValues[this.pType])=='undefined'){
           return '';
         }else{
-          return this.currentValues[this.configElement.element];
+          return this.currentValues[this.pType];
 //          var currentValuesEntriesParts = this.currentValues[this.configElement.element].split(":");
 //          return currentValuesEntriesParts[1].replace(';','');
         }
