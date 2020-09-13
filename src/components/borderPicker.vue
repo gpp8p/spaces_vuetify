@@ -37,6 +37,14 @@
                 required: true
            },
         },
+        mounted(){
+            if(this.currentValues.border=='checked'){
+                this.checkbox=true;
+            }
+            if(typeof(this.currentValues.borderSize)!='undefined'){
+                this.borderValue=this.currentValues.borderSize;
+            }
+        },
         data(){
             return{
                 borderLabel: "Border ?",
@@ -52,7 +60,7 @@
                 this.$emit('selectedValue', ['border', true]);
                 this.$emit('selectedValue', ['borderSize', msg]);
             },
-            
+
             selectedValue(msg){
                 this.$emit('selectedValue', ['borderColor', msg[1]]);
             }

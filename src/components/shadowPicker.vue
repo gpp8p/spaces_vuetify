@@ -28,6 +28,11 @@
                 shadow: false
             }
         },
+        mounted(){
+            if(this.currentValues.shadow=='checked'){
+                this.shadow=true;
+            }
+        },
         methods:{
             shadowClicked(){
                 this.$emit('selectedValue', [this.pType, this.shadow]);

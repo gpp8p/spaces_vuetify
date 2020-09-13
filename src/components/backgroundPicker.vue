@@ -40,8 +40,21 @@
               COLOR_SELECTED:1,
               IMAGE_SELECTED:2,
               val: '',
-              fileRole:"backgroundImage"
+              fileRole:"backgroundImage",
+              row:''
           }
+        },
+        mounted(){
+//            console.log(this.currentValues);
+            if(this.currentValues.backgroundType=='color'){
+                this.row='color_selected';
+                this.backgroundTypeSelection = this.COLOR_SELECTED;
+            }else if(this.currentValues.backgroundType=='image'){
+                this.backgroundTypeSelection = this.IMAGE_SELECTED;
+                this.row='image_selected';
+            }else{
+                this.row='';
+            }
         },
         methods:{
             colorSelected(){
@@ -56,6 +69,14 @@
             },
             selectedValue(msg){
                 this.$emit('selectedValue', msg);
+            },
+            getCurrentValue(){
+                //debugger;
+                if(typeof(this.currentValues[this.pType])=='undefined'){
+                    return '';
+                }else{
+                    return this.currentValues[this.pType];
+                }
             }
         }
     }

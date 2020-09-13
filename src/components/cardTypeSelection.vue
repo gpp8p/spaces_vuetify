@@ -21,8 +21,9 @@
             return {
                 items: ['Headline Card', 'Text Card'],
                 headlineCardDefaults:{
+                    "backgroundType":"color",
                     "backgroundTypeColor":'checked',
-                    "backgroundColor":"#FFFFFF",
+                    "backgroundColor":"#05ff34",
                     "fontSize":"12pt",
                     "fontWeight":"bold",
                     "border":"checked",
@@ -32,14 +33,16 @@
                     "shadowSize":"10px",
                     "shadowSizeSetAt":"10px",
                     "shadowColor":"#BBBBBB",
+                    "rounded":"checked",
                     "fontFamily":"Helvetica",
                     "fontStyle":"oblique",
                     "textAlign":"left",
                     "color":"#0537aa"
                 },
                 textCardDefaults:{
+                    "backgroundType":"image",
                     "backgroundTypeColor":'checked',
-                    "backgroundColor":"#FFFFFF",
+                    "backgroundColor":"#ff16fc",
                     "fontSize":"12pt",
                     "fontWeight":"bold",
                     "border":"checked",
@@ -49,6 +52,7 @@
                     "shadowSize":"10px",
                     "shadowSizeSetAt":"10px",
                     "shadowColor":"#BBBBBB",
+                    "rounded":"checked",
                     "fontFamily":"Helvetica",
                     "fontStyle":"oblique",
                     "textAlign":"left",

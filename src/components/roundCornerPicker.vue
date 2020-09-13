@@ -28,6 +28,11 @@
                 round: false
             }
         },
+        mounted(){
+            if(this.currentValues.rounded=='checked'){
+                this.round=true;
+            }
+        },
         methods:{
             roundClicked(){
                 this.$emit('selectedValue', [this.pType, this.round]);
