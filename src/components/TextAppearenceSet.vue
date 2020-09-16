@@ -13,16 +13,16 @@
 
             </span>
             <span class="fontSizeCss">
-                <font-size-picker @selectedValue="selectedValue"></font-size-picker>
+                <font-size-picker @selectedValue="selectedValue" :currentValues="currentValues"></font-size-picker>
             </span>
             <span class="fontWeightCss">
-                 <font-weight-picker @selectedValue="selectedValue"></font-weight-picker>
+                 <font-weight-picker @selectedValue="selectedValue" :currentValues="currentValues"></font-weight-picker>
             </span>
             <span class="fontStyeCss">
-                <font-style-picker @selectedValue="selectedValue"></font-style-picker>
+                <font-style-picker @selectedValue="selectedValue" :currentValues="currentValues"></font-style-picker>
             </span>
             <span class="fontAlignCss">
-                <font-align-picker @selectedValue="selectedValue"></font-align-picker>
+                <font-align-picker @selectedValue="selectedValue" :currentValues="currentValues"></font-align-picker>
             </span>
     </span>
 

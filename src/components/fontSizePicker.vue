@@ -3,6 +3,7 @@
                 <v-select @change="sizeSelected"
                           :items="items"
                           label="Select Font Size:"
+                          :value="selectedSize"
                           dense
                 ></v-select>
     </span>
@@ -11,6 +12,17 @@
 <script>
     export default {
         name: "fontSizePicker",
+        mounted(){
+            if(typeof(this.currentValues.fontSize)!='undefined'){
+                this.selectedSize=this.currentValues.fontSize;
+            }
+        },
+        props :{
+            currentValues:{
+                type: Object,
+                required: false
+            }
+        },
         data(){
             return {
                 selectedSize:'',

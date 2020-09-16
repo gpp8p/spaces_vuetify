@@ -26,7 +26,7 @@
 <script>
     import axios from "axios";
     import genericCard from '../components/genericCard.vue';
-    import Dialog from "./cardConfigDialog.vue";
+    import Dialog from "./newCardDialog.vue";
     export default {
         name: "editLayout",
         components:{genericCard, Dialog},

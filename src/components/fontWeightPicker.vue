@@ -3,6 +3,7 @@
                 <v-select @change="weightSelected"
                           :items="items"
                           label="Select Font Weight:"
+                          :value="selectedWeight"
                           dense
                 ></v-select>
     </span>
@@ -11,6 +12,17 @@
 <script>
     export default {
         name: "fontWeightPicker",
+        mounted(){
+            if(typeof(this.currentValues.fontWeight)!='undefined'){
+                this.selectedWeight=this.currentValues.fontWeight;
+            }
+        },
+        props :{
+            currentValues:{
+                type: Object,
+                required: false
+            }
+        },
         data(){
             return {
                 selectedWeight:'',

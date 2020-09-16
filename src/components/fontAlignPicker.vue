@@ -3,6 +3,7 @@
                 <v-select @change="alignSelected"
                           :items="items"
                           label="Select Alignment:"
+                          :value="selectedAlign"
                           dense
                 ></v-select>
     </span>
@@ -11,6 +12,17 @@
 <script>
     export default {
         name: "fontAlignPicker",
+        mounted(){
+            if(typeof(this.currentValues.textAlign)!='undefined'){
+                this.selectedAlign=this.currentValues.textAlign;
+            }
+        },
+        props :{
+            currentValues:{
+                type: Object,
+                required: false
+            }
+        },
         data(){
             return {
                 selectedAlign:'',

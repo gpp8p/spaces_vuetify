@@ -3,6 +3,7 @@
                 <v-select @change="styleSelected"
                           :items="items"
                           label="Select Font Style:"
+                          :value="selectedStyle"
                           dense
                 ></v-select>
     </span>
@@ -11,6 +12,17 @@
 <script>
     export default {
         name: "fontStylePicker",
+        mounted(){
+            if(typeof(this.currentValues.fontStyle)!='undefined'){
+                this.selectedStyle=this.currentValues.fontStyle;
+            }
+        },
+        props :{
+            currentValues:{
+                type: Object,
+                required: false
+            }
+        },
         data(){
             return {
                 selectedStyle:'',
