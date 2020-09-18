@@ -338,7 +338,28 @@
                        this.newCardBeingAdded=false;
                        this.openDialog=false;
                        break;
+                   case 'Create New Card':
+                        var currentLayoutId = this.$store.getters.getCurrentLayoutId;
+                        console.log(currentLayoutId, msg[1], msg[2], this.topLeftRow, this.topLeftCol, this.bottomRightRow, this.bottomRightCol);
+                       break;
                }
+            },
+            insertCard(layoutId, title, cardType, tlrow, tlcol, brrow, brcol){
+                axios.post('http://localhost:8000/saveCardOnly?XDEBUG_SESSION_START=12016', {
+                    layoutId: layoutId,
+                    cardTitle: title,
+                    cardType: cardType,
+                    topLeftRow: tlrow,
+                    topLeftCol: tlcol,
+                    bottomRightRow: brrow,
+                    bottomRightCol: brcol
+                }).then(response=>
+                {
+                    console.log('card saved:'+response);
+                    this.$emit('cardSaved', [layoutId]);
+                }).catch(function(error) {
+                    console.log(error);
+                });
             },
             cancelLayoutEdit(){
 //      console.log('noButton clicked');

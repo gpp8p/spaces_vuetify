@@ -49,6 +49,8 @@
                 selectedMenuItem: 0,
                 VIEW_TYPE_SELECTION: 0,
                 VIEW_SAVE: 4,
+                selectedCardType: '',
+                selectedCardName: ''
             }
         },
         methods: {
@@ -63,9 +65,14 @@
                         break;
                     case 'Create New Card':
                         this.selectedMenuItem = this.VIEW_SAVE;
-                        this.configurationSave();
+                        this.$emit('menuSelection', [msg[0], this.selectedCardType, this.selectedCardName ]);
                         break;
                 }
+            },
+            selectedValue(msg){
+                console.log('selectedValue:',msg);
+                this.selectedCardType = msg[1];
+                this.selectedCardName = msg[2];
             }
         }
     }
