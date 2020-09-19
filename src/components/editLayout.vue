@@ -340,11 +340,14 @@
                        break;
                    case 'Create New Card':
                         var currentLayoutId = this.$store.getters.getCurrentLayoutId;
-                        console.log(currentLayoutId, msg[1], msg[2], this.topLeftRow, this.topLeftCol, this.bottomRightRow, this.bottomRightCol);
+                        console.log(currentLayoutId, msg[2], msg[1], this.topLeftRow, this.topLeftCol, this.bottomRightRow, this.bottomRightCol);
+                        debugger;
+                        this.insertCard(currentLayoutId, msg[2], msg[1], this.topLeftRow, this.topLeftCol, this.bottomRightRow, this.bottomRightCol);
                        break;
                }
             },
             insertCard(layoutId, title, cardType, tlrow, tlcol, brrow, brcol){
+                debugger;
                 axios.post('http://localhost:8000/saveCardOnly?XDEBUG_SESSION_START=12016', {
                     layoutId: layoutId,
                     cardTitle: title,
@@ -356,7 +359,10 @@
                 }).then(response=>
                 {
                     console.log('card saved:'+response);
-                    this.$emit('cardSaved', [layoutId]);
+                    this.$router.push({
+                        name: 'displayLayout',
+                        params: { layoutId: this.$store.getters.getCurrentLayoutId }
+                    })
                 }).catch(function(error) {
                     console.log(error);
                 });

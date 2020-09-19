@@ -26,7 +26,7 @@
             return {
                 cardTitle:'',
                 selectedValue:'',
-                items: ['Headline Card', 'Text Card'],
+                items: ['greenComponent', 'Text Card'],
             }
         },
         methods:{
