@@ -21,8 +21,13 @@
         },
         watch: {
             layout: function(){
+                debugger;
                 console.log('contextArea layout changed');
-                this.showBackButton=true;
+                var thisStringLayoutIdStack = sessionStorage.getItem('layoutIdStack');
+                var thisLayoutIdStack = JSON.parse(thisStringLayoutIdStack);
+                if(thisLayoutIdStack.length>1){
+                    this.showBackButton = true;
+                }
             }
         },
         methods: {
