@@ -28,6 +28,7 @@
         methods: {
             goBack(){
                 debugger;
+                console.log('goBack()')
                 var thisStringLayoutIdStack = sessionStorage.getItem('layoutIdStack');
                 if(thisStringLayoutIdStack!=null){
                     var thisLayoutIdStack = JSON.parse(thisStringLayoutIdStack);
@@ -41,6 +42,9 @@
                     var stackTop = thisLayoutIdStack.length -1;
                     if(stackTop>=0){
                         var nextLayoutId = thisLayoutIdStack[stackTop]
+                        thisLayoutIdStack.pop();
+                        thisStringLayoutIdStack = JSON.stringify(thisLayoutIdStack);
+                        sessionStorage.setItem('layoutIdStack', thisStringLayoutIdStack);
                         this.$router.push({
                             name: 'displayLayout',
                             params: { layoutId: nextLayoutId }

@@ -33,6 +33,7 @@
         mounted(){
           debugger;
           console.log('displayLayout mounted',this.$route.params.layoutId);
+          debugger;
             var thisLayoutIdStack;
             var thisStringLayoutIdStack = sessionStorage.getItem('layoutIdStack');
             if(thisStringLayoutIdStack==null){
@@ -40,8 +41,12 @@
             }else{
                 thisLayoutIdStack = JSON.parse(thisStringLayoutIdStack);
             }
-            thisLayoutIdStack.push(parseInt(this.$route.params.layoutId));
-            sessionStorage.setItem('layoutIdStack', JSON.stringify(thisLayoutIdStack));
+            console.log(thisLayoutIdStack[thisLayoutIdStack.length-1],' - ', this.$route.params.layoutId);
+            if(thisLayoutIdStack[thisLayoutIdStack.length-1]!=this.$route.params.layoutId ){
+                console.log('pushing:',this.$route.params.layoutId);
+                thisLayoutIdStack.push(parseInt(this.$route.params.layoutId));
+                sessionStorage.setItem('layoutIdStack', JSON.stringify(thisLayoutIdStack));
+            }
             this.reloadLayoutForDisplay(this.$route.params.layoutId, this.$store.getters.getLoggedInUserId, this.$store.getters.getOrgId);
         },
         data(){
